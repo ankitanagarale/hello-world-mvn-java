@@ -9,8 +9,8 @@ TOMCAT_HOME="/home/ec2-user/apache-tomcat-9.0.93"
 # Stop Tomcat if it is already running (to ensure a clean start)
 sudo $TOMCAT_HOME/bin/shutdown.sh
 sudo rm -rf $TOMCAT_HOME/webapps/*
-/tmp/
 sudo cp /tmp/* $TOMCAT_HOME/webapp/
+sudo $TOMCAT_HOME/bin/startup.sh
 
 # Wait for Tomcat to fully stop (adjust the sleep duration based on your application's shutdown time)
 # sleep 10
