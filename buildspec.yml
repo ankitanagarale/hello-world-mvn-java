@@ -40,7 +40,6 @@ phases:
       - DEPLOYMENT_PACKAGE_NAME="deployment-package-$(date +"%Y%m%d%H%M%S").zip"
       - sed -i "s|{{WAR_FILE_NAME}}|hello-world-war-1.0.2.war|g" appspec.yml
       - cat appspec.yml
-      - cat application_stop_start.sh
       - zip -r $DEPLOYMENT_PACKAGE_NAME appspec.yml application_stop_start.sh hello-world-war-1.0.2.war
       - echo "Copying zipped files to cross-account S3 bucket which will be utilized for codedeploy"
       - aws s3 cp $DEPLOYMENT_PACKAGE_NAME $CROSS_ACCOUNT_S3_BUCKET_PATH/$DEPLOYMENT_PACKAGE_NAME
