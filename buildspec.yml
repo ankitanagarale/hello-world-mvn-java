@@ -63,7 +63,7 @@ phases:
       - echo "Deployment finished"
 
          #DAST
-      - cd rapid7-dast-codepipeline/bin
+      - cd rapid7/bin
       - python3 main.py & PYTHON_PID=$!; tail -f ../log/scan_automation.log & TAIL_PID=$!; wait $PYTHON_PID; kill $TAIL_PID
  
 artifacts:
