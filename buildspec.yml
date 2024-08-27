@@ -39,7 +39,7 @@ phases:
       - param_name="role"
       - CROSS_ACCOUNT_S3_BUCKET_PATH="s3://testsagar-123"
       - DEPLOY_ROLE=$(aws ssm get-parameter --name $param_name --with-decryption | jq -r ".Parameter.Value")
-      - role=$(aws sts assume-role --role-arn $DEPLOY_ROLE --role-session-name ohana-api-deployer-session --duration-seconds 900)
+      - role=$(aws sts assume-role --role-arn $DEPLOY_ROLE --role-session-name ohana-api-deployer-session)
       - KEY=$(echo $role | jq -r ".Credentials.AccessKeyId")
       - SECRET=$(echo $role | jq -r ".Credentials.SecretAccessKey")
       - TOKEN=$(echo $role | jq -r ".Credentials.SessionToken")
@@ -63,7 +63,7 @@ phases:
       - echo "Deployment finished"
 
          #DAST
-      - cd /rapid7-dast-codepipeline/bin
+      - cd rapid7-dast-codepipeline/bin
       - python3 main.py & PYTHON_PID=$!; tail -f ../log/scan_automation.log & TAIL_PID=$!; wait $PYTHON_PID; kill $TAIL_PID
  
 artifacts:
