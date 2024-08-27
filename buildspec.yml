@@ -5,7 +5,7 @@ phases:
    runtime-versions:
       python: 3.10  # Replace with the Python version you need
 
-      commands:
+   commands:
       - echo "Skipping yum update..."
       - pip install boto3
      
