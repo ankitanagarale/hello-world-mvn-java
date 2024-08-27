@@ -1,8 +1,7 @@
 <html>
 <head>
 <title>Hello World!</title>
-<meta name="insight-app-sec-validation" content="cd84fbac-b94b-4b0a-841f-d1a8c117466a">
-
+<meta name="insight-app-sec-validation" content="d5585f63-ff65-4e50-8618-3a764fe34a7a">
 </head>
 <body>
 	<h1>Hello world!! this is  sample java application..</h1>
