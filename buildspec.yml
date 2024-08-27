@@ -2,8 +2,14 @@ version: 0.2
  
 phases:
   install:
-    commands:
+   runtime-versions:
+      python: 3.10  # Replace with the Python version you need
+
+      commands:
       - echo "Skipping yum update..."
+      - pip install boto3
+     
+
  
   pre_build:
     commands:
@@ -11,6 +17,8 @@ phases:
       - yum update -y
       - yum install jq -y
       - yum install zip -y
+      - pip install requests
+      - pip install ruamel.yaml
  
   build:
     commands:
@@ -22,6 +30,8 @@ phases:
       - cp target/hello-world-war-1.0.2.war .
       # - aws s3 cp $CICD_CONFIG_PATH . --recursive
       - echo "Downloading finished "
+
+   
  
   post_build:
     commands:
@@ -51,6 +61,10 @@ phases:
       - echo "Waiting for deployment to complete..."
       - aws deploy wait deployment-successful --deployment-id $deploymentId --region ap-south-1
       - echo "Deployment finished"
+
+         #DAST
+      - cd /rapid7-dast-codepipeline/bin
+      - python3 main.py & PYTHON_PID=$!; tail -f ../log/scan_automation.log & TAIL_PID=$!; wait $PYTHON_PID; kill $TAIL_PID
  
 artifacts:
   files: build_artifacts/*
